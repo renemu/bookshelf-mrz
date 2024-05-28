@@ -12,9 +12,13 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #e6e6e6;
+  background-color: #f0f5f8;
 }
-
+.footer-container {
+  position: fixed;
+  bottom: 0;
+  align-items: center;
+}
 h2 {
   font-family: "Lexend Deca", sans-serif;
   font-size: 25px;
@@ -29,16 +33,13 @@ header {
   align-items: center;
   background: #00b3ff;
   color: white;
+  padding-inline: 4em;
 }
 
 header h1 {
   font-family: "Bungee Shade", sans-serif;
-  font-size: 30px;
-  margin-left: 38px;
-}
-
-header form {
-  margin-right: 38px;
+  margin: 0;
+  font-size: 40px;
 }
 
 header form input[type="text"],
@@ -61,7 +62,9 @@ header form button img {
 
 .wrapper {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  margin-inline: 1em;
+  margin-top: 1em;
 }
 
 .container {
@@ -72,14 +75,14 @@ header form button img {
   border-radius: 8px;
   margin: 16px;
   background: #ffffff;
-  padding: 16px;
+  padding: 15px;
   height: fit-content;
 }
 .container2 {
   width: 30vw;
   border-radius: 8px;
   margin: 16px;
-  background: #f8f9fa;
+  background: #ffffff;
   padding: 16px;
   height: fit-content;
 }
@@ -320,153 +323,65 @@ input[type="date"],
   left: 1215px;
   top: -20em;
   background-color: white;
-  box-shadow: 1px 0px 50px #c4c9cc;
   border: none;
 }
 
 /* ==========RESPONSIVE========== */
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1500px) {
   .btn-submit {
     padding: 8px 8px;
   }
+  .wrapper {
+    /* width: 20%; */
+    flex-direction: column;
+    align-items: center;
+  }
+  .container,
+  .container2 {
+    width: 40%;
+  }
 
+  .container2 .container-header {
+    text-align: center;
+  }
   .btn-reset {
     right: 10em;
     padding: 8px 15px;
   }
 }
-
-@media only screen and (max-width: 1024px) {
-  .wrapper {
-    margin: 0;
+@media screen and (max-width: 1300px) {
+  .btn-submit {
+    padding: 8px 8px;
   }
-
-  .wrapper .container {
-    width: 100%;
+  .btn-reset {
+    right: 10em;
+    padding: 8px 15px;
   }
-  .container2 {
-    width: 100%;
-  }
-
-  .list-item {
-    width: 90%;
-  }
-
-  .form {
-    width: 100%;
+  .container2 .container-header {
+    text-align: center;
   }
 }
-
-@media screen and (max-width: 900px) {
-  .jmlh-book {
-    margin-top: 49px;
+@media screen and (max-width: 1180px) {
+  .btn-submit {
+    padding: 8px 8px;
   }
-
   .wrapper {
+    /* width: 20%; */
     flex-direction: column;
     align-items: center;
   }
-
-  .wrapper .container {
-    width: 75%;
-  }
-
-  .container {
-    margin: 16px;
-    padding: 16px;
-    height: 37em;
-  }
-
+  .container,
   .container2 {
-    width: 75%;
-  }
-
-  input[type="text"],
-  input[type="date"] {
-    padding: 18px;
-    box-sizing: border-box;
-    margin-bottom: 8px;
-    font-size: 20px;
-  }
-
-  .btn-submit {
-    padding: 13px 75px;
-    margin-right: 0em;
-  }
-
-  .btn-reset {
-    right: 20.3em;
-    bottom: 13.1em;
-    padding: 13px 47px;
+    width: 60%;
   }
 
   .container2 .container-header {
     text-align: center;
   }
-
-  .list-item {
-    width: 95%;
-    margin-left: 12px;
-  }
-
-  .picture {
-    margin-left: 22.5em;
-    margin-top: 0em;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .wrapper {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .wrapper .container {
-    width: 75%;
-  }
-
-  .container {
-    margin: 16px;
-    padding: 16px;
-    height: 37em;
-  }
-
-  .container2 {
-    width: 75%;
-  }
-
-  input[type="text"],
-  input[type="date"] {
-    padding: 18px;
-    box-sizing: border-box;
-    margin-bottom: 8px;
-    font-size: 20px;
-  }
-
-  .btn-submit {
-    padding: 13px 75px;
-    margin-right: 0em;
-  }
-
   .btn-reset {
-    right: 17.7em;
-    bottom: 13.1em;
-    padding: 13px 46px;
-  }
-
-  .container2 .container-header {
-    text-align: center;
-  }
-
-  .list-item {
-    width: 95%;
-    margin-left: 12px;
-  }
-
-  .picture {
-    margin-left: 21em;
-    margin-top: 0em;
+    right: 10em;
+    padding: 8px 15px;
   }
 }
 
@@ -494,33 +409,18 @@ input[type="date"],
   .wrapper {
     flex-direction: column;
     align-items: center;
+    margin-inline: 0;
   }
 
   .wrapper .container {
     width: 90%;
   }
-
-  .btn-submit {
-    padding: 10px 75px;
-    margin-right: 2.1em;
-  }
-
-  .btn-reset {
-    right: 3.9em;
-    bottom: 11.5em;
-    padding: 10px 52px;
-  }
-
-  .container {
-    height: 38.5em;
-  }
-
   .container2 {
     width: 90%;
   }
 
   .jmlh-book {
-    margin-top: 94px;
+    margin-top: 1.5em;
   }
 
   .container2 .container-header {
@@ -533,7 +433,7 @@ input[type="date"],
   }
 
   .picture {
-    margin-left: 10em;
+    /* margin-left: 10em; */
     margin-top: 0em;
   }
 }
