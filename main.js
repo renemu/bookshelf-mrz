@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     e.preventDefault();
     addBook();
     Swal.fire({
-      position: "top-end",
+      position: "center",
       icon: "success",
       title: "Buku Berhasil Ditambahkan",
       text: "Data Buku Berada Di List Belum Dibaca",
@@ -111,6 +111,7 @@ function makeBook(newBook) {
         }
       });
     });
+
     const trashButton = document.createElement("button");
     trashButton.classList.add("trash-button");
 
@@ -157,6 +158,28 @@ function makeBook(newBook) {
       });
     });
 
+    const editButton = document.createElement("button");
+    editButton.classList.add("edit-button");
+
+    editButton.addEventListener("click", function () {
+      Swal.fire({
+        title: "Update Data Buku!",
+        text: "Anda Yakin Ingin Edit Buku Dari Rak Yang Belum Dibaca?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Ya",
+        confirmButtonColor: "#00b3ff",
+        cancelButtonText: "Batal",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // removeBookTitleFromReaded(newBook.id);
+          Swal.fire("Data Buku Berhasil Dihapus!", "", "success");
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire("Dibatalkan", "", "error");
+        }
+      });
+    });
+
     const trashButton = document.createElement("button");
     trashButton.classList.add("trash-button");
 
@@ -179,7 +202,7 @@ function makeBook(newBook) {
       });
     });
 
-    container.append(checkButton, trashButton);
+    container.append(checkButton, editButton, trashButton);
   }
 
   return container;
@@ -337,7 +360,9 @@ function bookIndex(newBook) {
     }
   }
 }
-
+// function updateBook(bookId) {
+//   const
+// }
 document.addEventListener(SAVED_EVENT, function () {
   console.log(localStorage.getItem(STORAGE_KEY));
 });
