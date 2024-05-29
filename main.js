@@ -3,8 +3,6 @@ const EVENT_CHANGE = "change-books";
 const SAVED_EVENT = "saved-books";
 const STORAGE_KEY = "BOOKSELF_APPS";
 
-// test script 1
-
 document.addEventListener("DOMContentLoaded", function () {
   const submitForm = document.getElementById("form");
   submitForm.addEventListener("submit", function (e) {
