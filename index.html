@@ -20,6 +20,7 @@
   </head>
   <body>
     <header>
+      <h1>Bookshelf Apps</h1>
       <form>
         <input class="" type="text" id="bookTitle" name="" placeholder="Cari Buku ..." />
       </form>
@@ -59,6 +60,24 @@
       </div>
     </div>
     <div class="no-list shadow"></div>
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close">&times;</span>
+          <p>Edit Buku</p>
+        </div>
+        <div class="modal-body">
+          <form action="" id="formEdit">
+            <input type="text" class="form-group form-title" id="editJudul" placeholder="Judul Buku" />
+            <input type="text" class="form-group form-title" id="editAuthor" placeholder="Author" />
+            <input type="date" class="form-group form-title" id="editDate" placeholder="Usia" />
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" id="submitEdit">Simpan</button>
+        </div>
+      </div>
+    </div>
     <footer class="footer-container" style="background-color: #00b3ff; color: white; text-align: center; padding: 10px; width: 100%">&#xA9; Created by MrZ 2024</footer>
     <script src="main.js"></script>
   </body>
