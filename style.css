@@ -301,17 +301,6 @@ input[type="date"],
 .hide {
   display: none;
 }
-/* .no-list {
-  width: 100px;
-  height: 100px;
-  position: relative;
-  border-radius: 10px;
-  left: 1215px;
-  top: -20em;
-  background-color: white;
-  box-shadow: 1px 0px 100px #91989b;
-  width: 5%;
-} */
 .picture {
   background: url("assets/icon/bxs-error-circle.svg") no-repeat;
   background-size: cover;
