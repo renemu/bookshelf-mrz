@@ -123,7 +123,6 @@ function makeBook(newBook) {
       span.onclick = function () {
         modal.style.display = "none";
       };
-      displayDataOnForm(dataToEdit);
       const btnSubmit = document.getElementById("simpan");
       btnSubmit.addEventListener("click", function () {
         Swal.fire({
