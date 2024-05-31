@@ -1,4 +1,5 @@
 const books = [];
+const bookId = [];
 const EVENT_CHANGE = "change-books";
 const SAVED_EVENT = "saved-books";
 const STORAGE_KEY = "BOOKSELF_APPS";
@@ -389,14 +390,14 @@ function findBook(bookId) {
   return null;
 }
 
-function getDataFromLocalStorage() {
-  const dataString = localStorage.getItem(STORAGE_KEY);
-  if (dataString) {
-    return JSON.parse(dataString);
-  } else {
-    return null;
-  }
-}
+// function getDataFromLocalStorage() {
+//   const dataString = localStorage.getItem(STORAGE_KEY);
+//   if (dataString) {
+//     return JSON.parse(dataString);
+//   } else {
+//     return null;
+//   }
+// }
 
 function editData(data) {
   document.getElementById("editJudul").value = data.title;
