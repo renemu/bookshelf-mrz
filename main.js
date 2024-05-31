@@ -1,5 +1,5 @@
 const books = [];
-const bookId = [];
+// const bookId = [];
 const EVENT_CHANGE = "change-books";
 const SAVED_EVENT = "saved-books";
 const STORAGE_KEY = "BOOKSELF_APPS";
@@ -56,7 +56,6 @@ function addBook() {
   document.dispatchEvent(new Event(EVENT_CHANGE));
   saveData();
 }
-
 function generateId() {
   return +new Date();
 }
@@ -89,6 +88,7 @@ function makeBook(newBook) {
   container.append(textContainer);
   container.setAttribute("id", `book-${newBook.id}`);
 
+  // sudah dibaca true
   if (newBook.isReaded) {
     const undoButton = document.createElement("img");
     undoButton.setAttribute("src", "assets/icon/undo-outline.svg");
@@ -112,7 +112,6 @@ function makeBook(newBook) {
         }
       });
     });
-
     const editButton = document.createElement("button");
     editButton.classList.add("edit-button");
     const modal = document.getElementById("myModal");
@@ -123,6 +122,11 @@ function makeBook(newBook) {
       span.onclick = function () {
         modal.style.display = "none";
       };
+      document.getElementById("editJudul").value = newBook.bookTitle;
+      document.getElementById("editAuthor").value = newBook.inputAuthor;
+      document.getElementById("editYear").value = newBook.inputYear;
+      console.log(newBook);
+
       const btnSubmit = document.getElementById("simpan");
       btnSubmit.addEventListener("click", function () {
         Swal.fire({
@@ -185,6 +189,7 @@ function makeBook(newBook) {
 
     container.append(undoButton, editButton, trashButton);
   } else {
+    // belum dibaca false default
     const checkButton = document.createElement("button");
     checkButton.classList.add("check-button");
 
@@ -217,6 +222,10 @@ function makeBook(newBook) {
       span.onclick = function () {
         modal.style.display = "none";
       };
+      document.getElementById("editJudul").value = newBook.bookTitle;
+      document.getElementById("editAuthor").value = newBook.inputAuthor;
+      document.getElementById("editYear").value = newBook.inputYear;
+      console.log(newBook);
       const btnSubmit = document.getElementById("simpan");
       btnSubmit.addEventListener("click", function () {
         Swal.fire({
@@ -389,21 +398,12 @@ function findBook(bookId) {
   return null;
 }
 
-// function getDataFromLocalStorage() {
-//   const dataString = localStorage.getItem(STORAGE_KEY);
-//   if (dataString) {
-//     return JSON.parse(dataString);
-//   } else {
-//     return null;
-//   }
+// function editData(data) {
+//   document.getElementById("editJudul").value = data.bookTitle;
+//   document.getElementById("editAuthor").value = data.author;
+//   document.getElementById("editDate").value = data.date;
 // }
 
-function editData(data) {
-  document.getElementById("editJudul").value = data.title;
-  document.getElementById("editAuthor").value = data.author;
-  document.getElementById("editDate").value = data.date;
-}
-console.log(bookId);
 function removeBookTitleFromReaded(bookId) {
   const bookTarget = findBookIndex(bookId);
 
