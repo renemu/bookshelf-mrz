@@ -105,10 +105,59 @@ function makeBook(newBook) {
       }).then((result) => {
         if (result.isConfirmed) {
           undoBookTitleFromReaded(newBook.id);
-          Swal.fire("Data Buku Dikembalikan ke List Belum Dibaca!", "", "success");
+          Swal.fire("Data Buku Berhasil Dikembalikan ke List Belum Dibaca!", "", "success");
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           Swal.fire("Dibatalkan", "", "error");
         }
+      });
+    });
+
+    const editButton = document.createElement("button");
+    editButton.classList.add("edit-button");
+    const modal = document.getElementById("myModal");
+    const span = document.getElementsByClassName("close")[0];
+
+    editButton.addEventListener("click", function () {
+      modal.style.display = "block";
+      span.onclick = function () {
+        modal.style.display = "none";
+      };
+      displayDataOnForm(dataToEdit);
+      const btnSubmit = document.getElementById("simpan");
+      btnSubmit.addEventListener("click", function () {
+        Swal.fire({
+          title: "Update Data Buku!",
+          text: "Anda Yakin Ingin Edit Buku Dari Rak Yang Sudah Dibaca?",
+          icon: "question",
+          showCancelButton: true,
+          confirmButtonText: "Ya",
+          confirmButtonColor: "#00b3ff",
+          cancelButtonText: "Batal",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // removeBookTitleFromReaded(newBook.id);
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Data Buku Berhasil Diedit",
+              showConfirmButton: false,
+              timer: 2000,
+              timerProgressBar: true,
+            });
+            setTimeout(function () {
+              window.location.reload();
+            }, 2000);
+          } else if (result.dismiss === Swal.DismissReason.cancel) {
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: "Edit Buku Dibatalkan",
+              showConfirmButton: false,
+              timer: 2000,
+              timerProgressBar: true,
+            });
+          }
+        });
       });
     });
 
@@ -119,7 +168,7 @@ function makeBook(newBook) {
       Swal.fire({
         title: "Hapus Data Buku!",
         text: "Anda Yakin Menghapus Buku Dari Rak Yang Sudah Dibaca?",
-        icon: "question",
+        icon: "warning",
         showCancelButton: true,
         confirmButtonText: "Hapus",
         confirmButtonColor: "#d33",
@@ -134,7 +183,7 @@ function makeBook(newBook) {
       });
     });
 
-    container.append(undoButton, trashButton);
+    container.append(undoButton, editButton, trashButton);
   } else {
     const checkButton = document.createElement("button");
     checkButton.classList.add("check-button");
@@ -142,7 +191,7 @@ function makeBook(newBook) {
     checkButton.addEventListener("click", function () {
       Swal.fire({
         title: "Pindah Data Buku!",
-        text: "Anda Yakin Buku Telah Dibaca?",
+        text: "Anda Yakin Buku Sudah Dibaca?",
         icon: "question",
         showCancelButton: true,
         confirmButtonText: "Ya",
@@ -151,7 +200,7 @@ function makeBook(newBook) {
       }).then((result) => {
         if (result.isConfirmed) {
           addBookTitleToReadList(newBook.id);
-          Swal.fire("Data Buku Dipindahkan ke List Sudah Dibaca!", "", "success");
+          Swal.fire("Data Buku Berhasil Dipindahkan ke List Sudah Dibaca!", "", "success");
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           Swal.fire("Dibatalkan", "", "error");
         }
@@ -160,23 +209,49 @@ function makeBook(newBook) {
 
     const editButton = document.createElement("button");
     editButton.classList.add("edit-button");
+    const modal = document.getElementById("myModal");
+    const span = document.getElementsByClassName("close")[0];
 
     editButton.addEventListener("click", function () {
-      Swal.fire({
-        title: "Update Data Buku!",
-        text: "Anda Yakin Ingin Edit Buku Dari Rak Yang Belum Dibaca?",
-        icon: "question",
-        showCancelButton: true,
-        confirmButtonText: "Ya",
-        confirmButtonColor: "#00b3ff",
-        cancelButtonText: "Batal",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // removeBookTitleFromReaded(newBook.id);
-          Swal.fire("Data Buku Berhasil Dihapus!", "", "success");
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-          Swal.fire("Dibatalkan", "", "error");
-        }
+      modal.style.display = "block";
+      span.onclick = function () {
+        modal.style.display = "none";
+      };
+      const btnSubmit = document.getElementById("simpan");
+      btnSubmit.addEventListener("click", function () {
+        Swal.fire({
+          title: "Update Data Buku!",
+          text: "Anda Yakin Ingin Edit Buku Dari Rak Yang Belum Dibaca?",
+          icon: "question",
+          showCancelButton: true,
+          confirmButtonText: "Ya",
+          confirmButtonColor: "#00b3ff",
+          cancelButtonText: "Batal",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // removeBookTitleFromReaded(newBook.id);
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Data Buku Berhasil Diedit",
+              showConfirmButton: false,
+              timer: 2000,
+              timerProgressBar: true,
+            });
+            setTimeout(function () {
+              window.location.reload();
+            }, 2000);
+          } else if (result.dismiss === Swal.DismissReason.cancel) {
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: "Edit Buku Dibatalkan",
+              showConfirmButton: false,
+              timer: 2000,
+              timerProgressBar: true,
+            });
+          }
+        });
       });
     });
 
@@ -187,7 +262,7 @@ function makeBook(newBook) {
       Swal.fire({
         title: "Hapus Data Buku!",
         text: "Anda Yakin Menghapus Buku Dari Rak Yang Belum Dibaca?",
-        icon: "question",
+        icon: "warning",
         showCancelButton: true,
         confirmButtonText: "Hapus",
         confirmButtonColor: "#d33",
@@ -314,6 +389,21 @@ function findBook(bookId) {
   return null;
 }
 
+function getDataFromLocalStorage() {
+  const dataString = localStorage.getItem(STORAGE_KEY);
+  if (dataString) {
+    return JSON.parse(dataString);
+  } else {
+    return null;
+  }
+}
+
+function editData(data) {
+  document.getElementById("editJudul").value = data.title;
+  document.getElementById("editAuthor").value = data.author;
+  document.getElementById("editDate").value = data.date;
+}
+console.log(bookId);
 function removeBookTitleFromReaded(bookId) {
   const bookTarget = findBookIndex(bookId);
 
@@ -360,9 +450,6 @@ function bookIndex(newBook) {
     }
   }
 }
-// function updateBook(bookId) {
-//   const
-// }
 document.addEventListener(SAVED_EVENT, function () {
   console.log(localStorage.getItem(STORAGE_KEY));
 });
