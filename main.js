@@ -1,5 +1,4 @@
 const books = [];
-// const bookId = [];
 const EVENT_CHANGE = "change-books";
 const SAVED_EVENT = "saved-books";
 const STORAGE_KEY = "BOOKSELF_APPS";
@@ -59,7 +58,6 @@ function addBook() {
 function generateId() {
   return +new Date();
 }
-
 function generateNewBook(id, bookTitle, inputAuthor, inputYear, isReaded) {
   return {
     id,
@@ -73,7 +71,6 @@ function generateNewBook(id, bookTitle, inputAuthor, inputYear, isReaded) {
 function makeBook(newBook) {
   const bookTitle = document.createElement("h2");
   bookTitle.innerText = newBook.bookTitle;
-
   const authorName = document.createElement("p");
   authorName.innerText = newBook.inputAuthor;
   const bookYear = document.createElement("p");
@@ -88,7 +85,6 @@ function makeBook(newBook) {
   container.append(textContainer);
   container.setAttribute("id", `book-${newBook.id}`);
 
-  // sudah dibaca true
   if (newBook.isReaded) {
     const undoButton = document.createElement("img");
     undoButton.setAttribute("src", "assets/icon/undo-outline.svg");
@@ -106,7 +102,14 @@ function makeBook(newBook) {
       }).then((result) => {
         if (result.isConfirmed) {
           undoBookTitleFromReaded(newBook.id);
-          Swal.fire("Data Buku Berhasil Dikembalikan ke List Belum Dibaca!", "", "success");
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Data Buku Berhasil Dipindahkan ke List Belum Dibaca!",
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+          });
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           Swal.fire("Dibatalkan", "", "error");
         }
@@ -122,11 +125,7 @@ function makeBook(newBook) {
       span.onclick = function () {
         modal.style.display = "none";
       };
-      document.getElementById("editJudul").value = newBook.bookTitle;
-      document.getElementById("editAuthor").value = newBook.inputAuthor;
-      document.getElementById("editYear").value = newBook.inputYear;
-      console.log(newBook);
-
+      displayData(newBook);
       const btnSubmit = document.getElementById("simpan");
       btnSubmit.addEventListener("click", function () {
         Swal.fire({
@@ -139,7 +138,7 @@ function makeBook(newBook) {
           cancelButtonText: "Batal",
         }).then((result) => {
           if (result.isConfirmed) {
-            // removeBookTitleFromReaded(newBook.id);
+            editData(newBook);
             Swal.fire({
               position: "center",
               icon: "success",
@@ -189,7 +188,6 @@ function makeBook(newBook) {
 
     container.append(undoButton, editButton, trashButton);
   } else {
-    // belum dibaca false default
     const checkButton = document.createElement("button");
     checkButton.classList.add("check-button");
 
@@ -205,7 +203,14 @@ function makeBook(newBook) {
       }).then((result) => {
         if (result.isConfirmed) {
           addBookTitleToReadList(newBook.id);
-          Swal.fire("Data Buku Berhasil Dipindahkan ke List Sudah Dibaca!", "", "success");
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Data Buku Berhasil Dipindahkan ke List Sudah Dibaca!",
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+          });
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           Swal.fire("Dibatalkan", "", "error");
         }
@@ -222,10 +227,7 @@ function makeBook(newBook) {
       span.onclick = function () {
         modal.style.display = "none";
       };
-      document.getElementById("editJudul").value = newBook.bookTitle;
-      document.getElementById("editAuthor").value = newBook.inputAuthor;
-      document.getElementById("editYear").value = newBook.inputYear;
-      console.log(newBook);
+      displayData(newBook);
       const btnSubmit = document.getElementById("simpan");
       btnSubmit.addEventListener("click", function () {
         Swal.fire({
@@ -238,7 +240,7 @@ function makeBook(newBook) {
           cancelButtonText: "Batal",
         }).then((result) => {
           if (result.isConfirmed) {
-            // removeBookTitleFromReaded(newBook.id);
+            editData(newBook);
             Swal.fire({
               position: "center",
               icon: "success",
@@ -338,13 +340,13 @@ resetList.addEventListener("click", function () {
   const reset = books.length;
   if (reset == 0) {
     Swal.fire({
-      title: "List Buku Kosong?",
-      icon: "question",
+      title: "List Buku Kosong!",
+      icon: "info",
     });
   } else {
     Swal.fire({
       title: "Hapus Semua List Buku!",
-      text: "Anda Yakin Menghapus Semua List?",
+      text: "Anda Yakin Ingin Menghapus Semua List Buku?",
       icon: "question",
       showCancelButton: true,
       confirmButtonText: "Hapus",
@@ -398,11 +400,35 @@ function findBook(bookId) {
   return null;
 }
 
-// function editData(data) {
-//   document.getElementById("editJudul").value = data.bookTitle;
-//   document.getElementById("editAuthor").value = data.author;
-//   document.getElementById("editDate").value = data.date;
-// }
+function displayData(newBook) {
+  newBook.id;
+  document.getElementById("editJudul").value = newBook.bookTitle;
+  document.getElementById("editAuthor").value = newBook.inputAuthor;
+  document.getElementById("editYear").value = newBook.inputYear;
+  newBook.isReaded;
+  console.table(newBook);
+}
+
+function editData(newBook) {
+  const editedBook = {
+    id: newBook.id,
+    bookTitle: document.getElementById("editJudul").value,
+    inputAuthor: document.getElementById("editAuthor").value,
+    inputYear: document.getElementById("editYear").value,
+    isReaded: newBook.isReaded,
+  };
+  let booksEdit;
+  if (localStorage.getItem(STORAGE_KEY) === null) {
+    booksEdit = [];
+  } else {
+    booksEdit = JSON.parse(localStorage.getItem(STORAGE_KEY));
+  }
+  const index = booksEdit.findIndex(
+    (bookId) => bookId.id === newBook.id && bookId.bookTitle === newBook.bookTitle && bookId.inputAuthor === newBook.inputAuthor && bookId.inputYear === newBook.inputYear && bookId.isReaded === newBook.isReaded
+  );
+  booksEdit[index] = editedBook;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(booksEdit));
+}
 
 function removeBookTitleFromReaded(bookId) {
   const bookTarget = findBookIndex(bookId);
