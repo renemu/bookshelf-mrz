@@ -398,7 +398,10 @@ input[type="date"],
   .container2 {
     width: 40%;
   }
-
+  .picture {
+    top: 1em;
+    left: 42em;
+  }
   .container2 .container-header {
     text-align: center;
   }
@@ -415,6 +418,11 @@ input[type="date"],
     right: 10em;
     padding: 8px 15px;
   }
+
+  .picture {
+    top: 1em;
+    left: 30em;
+  }
   .container2 .container-header {
     text-align: center;
   }
@@ -425,6 +433,10 @@ input[type="date"],
   }
   .btn-submit {
     padding: 8px 8px;
+  }
+  .picture {
+    top: 1em;
+    left: 19em;
   }
   .wrapper {
     flex-direction: column;
@@ -497,6 +509,7 @@ input[type="date"],
   }
 
   .picture {
-    margin-top: 0em;
+    top: 1em;
+    left: 9em;
   }
 }
