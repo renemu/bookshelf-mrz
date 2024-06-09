@@ -44,24 +44,42 @@
             <button type="submit" class="btn-reset" id="btn-reset">Hapus Semua List</button>
           </div>
           <div class="jmlh-book">
-            <h3>Jumlah Buku:</h3>
+            <h3>Jumlah Buku :</h3>
             <h4 id="total-books"></h4>
           </div>
         </form>
       </div>
-      <div class="container2">
-        <h2 class="container-header">Belum Dibaca: <span id="unread-book"></span></h2>
-
+      <div class="container2 shadow">
+        <h2 class="container-header">Belum Dibaca : <span id="unread-book"></span></h2>
         <div class="list-item" id="books"></div>
       </div>
-      <div class="container2">
-        <h2 class="container-header">Sudah Dibaca: <span id="read-book"></span></h2>
+      <div class="container2 shadow">
+        <h2 class="container-header">Sudah Dibaca : <span id="read-book"></span></h2>
 
         <div class="list-item" id="books-items"></div>
       </div>
     </div>
-    <div class="no-list"></div>
+    <div class="no-list shadow"></div>
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close">&times;</span>
+          <p>Edit Buku</p>
+        </div>
+        <div class="modal-body">
+          <form action="" id="formEdit">
+            <input type="text" class="form-group form-title" id="editJudul" />
+            <input type="text" class="form-group form-title" id="editAuthor" />
+            <input type="date" class="form-group form-title" id="editYear" />
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" id="simpan">Simpan</button>
+        </div>
+      </div>
+    </div>
 
+    <footer class="footer-container" style="background-color: #00b3ff; color: white; text-align: center; padding: 10px; width: 100%">&#xA9; Created by MrZ 2024 version 1.0</footer>
     <script src="main.js"></script>
   </body>
 </html>

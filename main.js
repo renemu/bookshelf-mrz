@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     e.preventDefault();
     addBook();
     Swal.fire({
-      position: "top-end",
+      position: "center",
       icon: "success",
       title: "Buku Berhasil Ditambahkan",
       text: "Data Buku Berada Di List Belum Dibaca",
@@ -55,11 +55,9 @@ function addBook() {
   document.dispatchEvent(new Event(EVENT_CHANGE));
   saveData();
 }
-
 function generateId() {
   return +new Date();
 }
-
 function generateNewBook(id, bookTitle, inputAuthor, inputYear, isReaded) {
   return {
     id,
@@ -73,7 +71,6 @@ function generateNewBook(id, bookTitle, inputAuthor, inputYear, isReaded) {
 function makeBook(newBook) {
   const bookTitle = document.createElement("h2");
   bookTitle.innerText = newBook.bookTitle;
-
   const authorName = document.createElement("p");
   authorName.innerText = newBook.inputAuthor;
   const bookYear = document.createElement("p");
@@ -105,12 +102,68 @@ function makeBook(newBook) {
       }).then((result) => {
         if (result.isConfirmed) {
           undoBookTitleFromReaded(newBook.id);
-          Swal.fire("Data Buku Dikembalikan ke List Belum Dibaca!", "", "success");
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Data Buku Berhasil Dipindahkan ke List Belum Dibaca!",
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+          });
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           Swal.fire("Dibatalkan", "", "error");
         }
       });
     });
+    const editButton = document.createElement("button");
+    editButton.classList.add("edit-button");
+    const modal = document.getElementById("myModal");
+    const span = document.getElementsByClassName("close")[0];
+
+    editButton.addEventListener("click", function () {
+      modal.style.display = "block";
+      span.onclick = function () {
+        modal.style.display = "none";
+      };
+      displayData(newBook);
+      const btnSubmit = document.getElementById("simpan");
+      btnSubmit.addEventListener("click", function () {
+        Swal.fire({
+          title: "Update Data Buku!",
+          text: "Anda Yakin Ingin Edit Buku Dari Rak Yang Sudah Dibaca?",
+          icon: "question",
+          showCancelButton: true,
+          confirmButtonText: "Ya",
+          confirmButtonColor: "#00b3ff",
+          cancelButtonText: "Batal",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            editData(newBook);
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Data Buku Berhasil Diedit",
+              showConfirmButton: false,
+              timer: 2000,
+              timerProgressBar: true,
+            });
+            setTimeout(function () {
+              window.location.reload();
+            }, 2000);
+          } else if (result.dismiss === Swal.DismissReason.cancel) {
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: "Edit Buku Dibatalkan",
+              showConfirmButton: false,
+              timer: 2000,
+              timerProgressBar: true,
+            });
+          }
+        });
+      });
+    });
+
     const trashButton = document.createElement("button");
     trashButton.classList.add("trash-button");
 
@@ -118,7 +171,7 @@ function makeBook(newBook) {
       Swal.fire({
         title: "Hapus Data Buku!",
         text: "Anda Yakin Menghapus Buku Dari Rak Yang Sudah Dibaca?",
-        icon: "question",
+        icon: "warning",
         showCancelButton: true,
         confirmButtonText: "Hapus",
         confirmButtonColor: "#d33",
@@ -133,7 +186,7 @@ function makeBook(newBook) {
       });
     });
 
-    container.append(undoButton, trashButton);
+    container.append(undoButton, editButton, trashButton);
   } else {
     const checkButton = document.createElement("button");
     checkButton.classList.add("check-button");
@@ -141,7 +194,7 @@ function makeBook(newBook) {
     checkButton.addEventListener("click", function () {
       Swal.fire({
         title: "Pindah Data Buku!",
-        text: "Anda Yakin Buku Telah Dibaca?",
+        text: "Anda Yakin Buku Sudah Dibaca?",
         icon: "question",
         showCancelButton: true,
         confirmButtonText: "Ya",
@@ -150,10 +203,66 @@ function makeBook(newBook) {
       }).then((result) => {
         if (result.isConfirmed) {
           addBookTitleToReadList(newBook.id);
-          Swal.fire("Data Buku Dipindahkan ke List Sudah Dibaca!", "", "success");
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Data Buku Berhasil Dipindahkan ke List Sudah Dibaca!",
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+          });
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           Swal.fire("Dibatalkan", "", "error");
         }
+      });
+    });
+
+    const editButton = document.createElement("button");
+    editButton.classList.add("edit-button");
+    const modal = document.getElementById("myModal");
+    const span = document.getElementsByClassName("close")[0];
+
+    editButton.addEventListener("click", function () {
+      modal.style.display = "block";
+      span.onclick = function () {
+        modal.style.display = "none";
+      };
+      displayData(newBook);
+      const btnSubmit = document.getElementById("simpan");
+      btnSubmit.addEventListener("click", function () {
+        Swal.fire({
+          title: "Update Data Buku!",
+          text: "Anda Yakin Ingin Edit Buku Dari Rak Yang Belum Dibaca?",
+          icon: "question",
+          showCancelButton: true,
+          confirmButtonText: "Ya",
+          confirmButtonColor: "#00b3ff",
+          cancelButtonText: "Batal",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            editData(newBook);
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Data Buku Berhasil Diedit",
+              showConfirmButton: false,
+              timer: 2000,
+              timerProgressBar: true,
+            });
+            setTimeout(function () {
+              window.location.reload();
+            }, 2000);
+          } else if (result.dismiss === Swal.DismissReason.cancel) {
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: "Edit Buku Dibatalkan",
+              showConfirmButton: false,
+              timer: 2000,
+              timerProgressBar: true,
+            });
+          }
+        });
       });
     });
 
@@ -164,7 +273,7 @@ function makeBook(newBook) {
       Swal.fire({
         title: "Hapus Data Buku!",
         text: "Anda Yakin Menghapus Buku Dari Rak Yang Belum Dibaca?",
-        icon: "question",
+        icon: "warning",
         showCancelButton: true,
         confirmButtonText: "Hapus",
         confirmButtonColor: "#d33",
@@ -179,7 +288,7 @@ function makeBook(newBook) {
       });
     });
 
-    container.append(checkButton, trashButton);
+    container.append(checkButton, editButton, trashButton);
   }
 
   return container;
@@ -231,13 +340,13 @@ resetList.addEventListener("click", function () {
   const reset = books.length;
   if (reset == 0) {
     Swal.fire({
-      title: "List Buku Kosong?",
-      icon: "question",
+      title: "List Buku Kosong!",
+      icon: "info",
     });
   } else {
     Swal.fire({
       title: "Hapus Semua List Buku!",
-      text: "Anda Yakin Menghapus Semua List?",
+      text: "Anda Yakin Ingin Menghapus Semua List Buku?",
       icon: "question",
       showCancelButton: true,
       confirmButtonText: "Hapus",
@@ -291,6 +400,36 @@ function findBook(bookId) {
   return null;
 }
 
+function displayData(newBook) {
+  newBook.id;
+  document.getElementById("editJudul").value = newBook.bookTitle;
+  document.getElementById("editAuthor").value = newBook.inputAuthor;
+  document.getElementById("editYear").value = newBook.inputYear;
+  newBook.isReaded;
+  console.table(newBook);
+}
+
+function editData(newBook) {
+  const editedBook = {
+    id: newBook.id,
+    bookTitle: document.getElementById("editJudul").value,
+    inputAuthor: document.getElementById("editAuthor").value,
+    inputYear: document.getElementById("editYear").value,
+    isReaded: newBook.isReaded,
+  };
+  let booksEdit;
+  if (localStorage.getItem(STORAGE_KEY) === null) {
+    booksEdit = [];
+  } else {
+    booksEdit = JSON.parse(localStorage.getItem(STORAGE_KEY));
+  }
+  const index = booksEdit.findIndex(
+    (bookId) => bookId.id === newBook.id && bookId.bookTitle === newBook.bookTitle && bookId.inputAuthor === newBook.inputAuthor && bookId.inputYear === newBook.inputYear && bookId.isReaded === newBook.isReaded
+  );
+  booksEdit[index] = editedBook;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(booksEdit));
+}
+
 function removeBookTitleFromReaded(bookId) {
   const bookTarget = findBookIndex(bookId);
 
@@ -337,7 +476,6 @@ function bookIndex(newBook) {
     }
   }
 }
-
 document.addEventListener(SAVED_EVENT, function () {
   console.log(localStorage.getItem(STORAGE_KEY));
 });

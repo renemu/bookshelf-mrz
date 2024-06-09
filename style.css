@@ -12,11 +12,18 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #e6e6e6;
+  background-color: #f0f5f8;
 }
-
+.footer-container {
+  position: fixed;
+  bottom: 0;
+  align-items: center;
+}
 h2 {
-  font-size: 20px;
+  font-family: "Lexend Deca", sans-serif;
+  font-size: 25px;
+  padding: 0;
+  margin: 0;
   color: #00b3ff;
 }
 
@@ -26,16 +33,13 @@ header {
   align-items: center;
   background: #00b3ff;
   color: white;
+  padding-inline: 4em;
 }
 
 header h1 {
   font-family: "Bungee Shade", sans-serif;
-  font-size: 30px;
-  margin-left: 38px;
-}
-
-header form {
-  margin-right: 38px;
+  margin: 0;
+  font-size: 40px;
 }
 
 header form input[type="text"],
@@ -58,25 +62,26 @@ header form button img {
 
 .wrapper {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  margin-inline: 1em;
+  margin-top: 1em;
 }
 
 .container {
-  /* position: relative; */
   display: flex;
   flex-direction: column;
   width: 30vw;
   border-radius: 8px;
   margin: 16px;
   background: #ffffff;
-  padding: 16px;
+  padding: 15px;
   height: fit-content;
 }
 .container2 {
   width: 30vw;
   border-radius: 8px;
   margin: 16px;
-  background: #f8f9fa;
+  background: #ffffff;
   padding: 16px;
   height: fit-content;
 }
@@ -87,7 +92,7 @@ header form button img {
 .item {
   border-radius: 16px;
   margin-top: 16px;
-  padding: 7px 15px 7px 15px;
+  padding: 10px;
   background: #00b3ff;
   color: white;
   display: flex;
@@ -95,13 +100,11 @@ header form button img {
 }
 
 .item > .inner h2 {
-  margin-bottom: unset;
   font-size: 20px;
   color: white;
 }
 
 .item > .inner p {
-  margin-top: 5px;
   font-size: 12px;
 }
 
@@ -139,18 +142,6 @@ input[type="date"] {
   font-size: 17px;
 }
 
-/* .btn-submit {
-  width: fit-content;
-  border-radius: 39px;
-  padding: 13px 108px;
-  border: 2px solid #f87ace;
-  color: #f87ace;
-  font-size: 17px;
-  font-weight: 600;
-  margin-top: 15px;
-  align-self: flex-end;
-  cursor: pointer;
-} */
 .line-btn-check {
   margin-top: 1rem;
   display: flex;
@@ -178,7 +169,6 @@ input[type="date"] {
 }
 
 .btn-reset {
-  /* position: absolute; */
   width: 100%;
   border-radius: 15px;
   right: 11em;
@@ -189,7 +179,6 @@ input[type="date"] {
   background-color: transparent;
   font-size: 17px;
   font-weight: 600;
-  /* align-self: flex-end; */
   cursor: pointer;
 }
 
@@ -235,7 +224,7 @@ input[type="date"],
 
   background: url("assets/icon/trash-outline.svg") no-repeat;
   background-size: 25px;
-  margin-left: 16px;
+  margin-left: 5px;
   cursor: pointer;
   border: none;
 }
@@ -245,11 +234,25 @@ input[type="date"],
   background-size: 25px;
 }
 
+.edit-button {
+  width: 40px;
+  height: 40px;
+  background: url("assets/icon/edit-bx.svg") no-repeat;
+  background-size: 25px;
+  margin-left: 10px;
+  border: none;
+  cursor: pointer;
+}
+.edit-button:hover {
+  background: url("assets/icon/edit-bxs.svg") no-repeat;
+  background-size: 25px;
+}
 .undo-button {
-  width: 25px;
+  width: 22px;
 
   margin-left: auto;
-  margin-bottom: 9px;
+  margin-right: 1em;
+  margin-bottom: 10px;
   cursor: pointer;
   outline: none;
   transition: 0.3s;
@@ -263,10 +266,16 @@ input[type="date"],
 .trash-button {
   outline: none;
 }
-
+#total-books {
+  padding: auto;
+  margin: 0;
+  margin-bottom: 15px;
+  font-size: 60px;
+}
 .jmlh-book {
-  margin-top: 28px;
-  padding-bottom: 15px;
+  margin-top: 1.5em;
+  padding: 0;
+  font-size: 20px;
   border: 2px solid #00b3ff;
   color: #00b3ff;
   border-radius: 10px;
@@ -277,17 +286,6 @@ input[type="date"],
 .hide {
   display: none;
 }
-/* .no-list {
-  width: 100px;
-  height: 100px;
-  position: relative;
-  border-radius: 10px;
-  left: 1215px;
-  top: -20em;
-  background-color: white;
-  box-shadow: 1px 0px 100px #91989b;
-  width: 5%;
-} */
 .picture {
   background: url("assets/icon/bxs-error-circle.svg") no-repeat;
   background-size: cover;
@@ -298,153 +296,151 @@ input[type="date"],
   left: 1215px;
   top: -20em;
   background-color: white;
-  box-shadow: 1px 0px 50px #c4c9cc;
   border: none;
+}
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-header {
+  padding: 1px;
+  text-align: center;
+  font-size: 35px;
+  background-color: #00b3ff;
+  color: white;
+}
+
+.modal-body form {
+  margin-top: 1.5em;
+  display: flex;
+  flex-direction: column;
+  padding: 2px 20px;
+}
+
+.modal-footer {
+  text-align: end;
+  padding: 20px 20px;
+  color: white;
+}
+.modal-footer button {
+  color: #00b3ff;
+  font-size: 20px;
+  background: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+.modal-footer button:hover {
+  background: #00b3ff;
+  color: white;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  border-radius: 10px;
+  color: #00b3ff;
+  margin: auto;
+  margin-top: 3em;
+  padding: 15px;
+  border: 1px solid #ffffff;
+  width: 40%;
+  box-shadow: 0 4px 100px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+}
+
+.close {
+  color: #ffffff;
+  float: right;
+  margin-right: 15px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: rgb(255, 0, 0);
+  text-decoration: none;
+  cursor: pointer;
+}
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
 }
 
 /* ==========RESPONSIVE========== */
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1500px) {
   .btn-submit {
     padding: 8px 8px;
   }
+  .wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+  .container,
+  .container2 {
+    width: 40%;
+  }
 
+  .container2 .container-header {
+    text-align: center;
+  }
   .btn-reset {
     right: 10em;
     padding: 8px 15px;
   }
 }
-
-@media only screen and (max-width: 1024px) {
-  .wrapper {
-    margin: 0;
+@media screen and (max-width: 1300px) {
+  .btn-submit {
+    padding: 8px 8px;
   }
-
-  .wrapper .container {
-    width: 100%;
+  .btn-reset {
+    right: 10em;
+    padding: 8px 15px;
   }
-  .container2 {
-    width: 100%;
-  }
-
-  .list-item {
-    width: 90%;
-  }
-
-  .form {
-    width: 100%;
+  .container2 .container-header {
+    text-align: center;
   }
 }
-
-@media screen and (max-width: 900px) {
-  .jmlh-book {
-    margin-top: 49px;
+@media screen and (max-width: 1180px) {
+  .modal-content {
+    width: 57%;
   }
-
+  .btn-submit {
+    padding: 8px 8px;
+  }
   .wrapper {
     flex-direction: column;
     align-items: center;
   }
-
-  .wrapper .container {
-    width: 75%;
-  }
-
-  .container {
-    margin: 16px;
-    padding: 16px;
-    height: 37em;
-  }
-
+  .container,
   .container2 {
-    width: 75%;
-  }
-
-  input[type="text"],
-  input[type="date"] {
-    padding: 18px;
-    box-sizing: border-box;
-    margin-bottom: 8px;
-    font-size: 20px;
-  }
-
-  .btn-submit {
-    padding: 13px 75px;
-    margin-right: 0em;
-  }
-
-  .btn-reset {
-    right: 20.3em;
-    bottom: 13.1em;
-    padding: 13px 47px;
+    width: 60%;
   }
 
   .container2 .container-header {
     text-align: center;
   }
-
-  .list-item {
-    width: 95%;
-    margin-left: 12px;
-  }
-
-  .picture {
-    margin-left: 22.5em;
-    margin-top: 0em;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .wrapper {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .wrapper .container {
-    width: 75%;
-  }
-
-  .container {
-    margin: 16px;
-    padding: 16px;
-    height: 37em;
-  }
-
-  .container2 {
-    width: 75%;
-  }
-
-  input[type="text"],
-  input[type="date"] {
-    padding: 18px;
-    box-sizing: border-box;
-    margin-bottom: 8px;
-    font-size: 20px;
-  }
-
-  .btn-submit {
-    padding: 13px 75px;
-    margin-right: 0em;
-  }
-
   .btn-reset {
-    right: 17.7em;
-    bottom: 13.1em;
-    padding: 13px 46px;
-  }
-
-  .container2 .container-header {
-    text-align: center;
-  }
-
-  .list-item {
-    width: 95%;
-    margin-left: 12px;
-  }
-
-  .picture {
-    margin-left: 21em;
-    margin-top: 0em;
+    right: 10em;
+    padding: 8px 15px;
   }
 }
 
@@ -456,6 +452,7 @@ input[type="date"],
 
   header h1 {
     margin-left: 7px;
+    font-size: 30px;
   }
 
   header form {
@@ -468,37 +465,26 @@ input[type="date"],
   header form input[type="date"] {
     padding: 10px 9em 10px 10px;
   }
-
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+  }
   .wrapper {
     flex-direction: column;
     align-items: center;
+    margin-inline: 0;
   }
 
   .wrapper .container {
     width: 90%;
   }
-
-  .btn-submit {
-    padding: 10px 75px;
-    margin-right: 2.1em;
-  }
-
-  .btn-reset {
-    right: 3.9em;
-    bottom: 11.5em;
-    padding: 10px 52px;
-  }
-
-  .container {
-    height: 38.5em;
-  }
-
   .container2 {
     width: 90%;
   }
 
   .jmlh-book {
-    margin-top: 94px;
+    margin-top: 1.5em;
   }
 
   .container2 .container-header {
@@ -511,7 +497,6 @@ input[type="date"],
   }
 
   .picture {
-    margin-left: 10em;
     margin-top: 0em;
   }
 }
