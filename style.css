@@ -33,12 +33,13 @@ header {
   align-items: center;
   background: #00b3ff;
   color: white;
+  padding-top: 0.5rem;
   padding-inline: 4em;
 }
 
 header h1 {
   font-family: "Bungee Shade", sans-serif;
-  margin: 0;
+  margin-top: 0;
   font-size: 30px;
 }
 
