@@ -406,7 +406,6 @@ function displayData(newBook) {
   document.getElementById("editAuthor").value = newBook.inputAuthor;
   document.getElementById("editYear").value = newBook.inputYear;
   newBook.isReaded;
-  console.table(newBook);
 }
 
 function editData(newBook) {
@@ -476,9 +475,6 @@ function bookIndex(newBook) {
     }
   }
 }
-document.addEventListener(SAVED_EVENT, function () {
-  console.log(localStorage.getItem(STORAGE_KEY));
-});
 
 function loadDataFromStorage() {
   const serializedData = localStorage.getItem(STORAGE_KEY);
