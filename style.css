@@ -102,3 +102,6 @@ label { font-size:12px; font-weight:600; }
 .undo-button { background-image:url('assets/icon/undo-outline.svg'); }
 .check-button:hover,.undo-button:hover,.edit-button:hover { background-color:#1b513b; }
 .trash-button:hover { background-color:#aa5351; border-color:#aa5351; }
+
+.footer-credit a { color:var(--green); font-weight:600; text-decoration:underline; text-underline-offset:3px; }
+.footer-credit a:hover { color:#1b513b; }

@@ -55,4 +55,4 @@ bookshelf-mrz/
 
 Belum tersedia test suite otomatis di repository. Untuk pemeriksaan sintaks JavaScript, jalankan `node --check main.js` jika Node.js tersedia.
 
-Dibuat oleh **MrZ**.
+Dibuat oleh [renemu](https://github.com/renemu).
