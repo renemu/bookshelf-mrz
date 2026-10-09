@@ -1,15 +1,58 @@
-<h1>Bookshelf Apps To Do</h1>
-<h3>This is an application for web-based book management using local data storage management.</h3>
+# Bookshelf
 
-in this application contains :
+Rak buku pribadi berbasis web untuk mengatur bacaanmu. Dibangun dengan HTML, CSS, dan JavaScript tanpa framework, dengan antarmuka berbahasa Indonesia.
 
-- add book data with the contents of the title, author, and time when adding the book.
-- has 2 bookshelves with unread shelves and read shelves.
-- has a notification feature with a modal that states confirmation options such as yes or no.
-- and also books can be edited on both read and unread shelves.
-- has a search feature based on title, author, and time.
-- by default when you add new book data it will be stored on the unread shelf.
-- the language used in this application is Indonesian (maybe there will be a language option feature for some countries).
+## Fitur
 
-this application is still in the development stage to be further made like a professional application that offers user convenience in this application.
-the current version of the application is 1.0. (version 1.0.)
+- Tambahkan buku dengan judul, penulis, dan tanggal bacaan.
+- Kelompokkan koleksi ke rak **Belum dibaca** dan **Sudah dibaca**.
+- Pindahkan buku antar rak, edit detail, atau hapus buku dengan konfirmasi.
+- Cari berdasarkan judul, penulis, atau tanggal; pencarian tidak membedakan huruf besar dan kecil.
+- Lihat jumlah koleksi dan jumlah buku di setiap rak.
+- Simpan koleksi otomatis menggunakan `localStorage`.
+
+## Tampilan
+
+Desain bernuansa hijau sage dengan ilustrasi buku, kartu koleksi, tampilan rak kosong, dan label formulir yang jelas. Layout menggunakan tiga kolom pada desktop, dua kolom pada tablet, dan satu kolom pada ponsel. Footer mengikuti alur halaman sehingga tidak menutupi konten. Font sistem dan ikon lokal digunakan tanpa layanan font eksternal.
+
+## Menjalankan secara lokal
+
+Tidak ada dependensi npm atau proses build. Gunakan server statis, misalnya Python 3:
+
+```bash
+git clone https://github.com/renemu/bookshelf-mrz.git
+cd bookshelf-mrz
+python3 -m http.server 8000
+```
+
+Buka `http://localhost:8000` di browser. Jika menggunakan checkout yang sudah tersedia, cukup jalankan perintah server dari direktori repository.
+
+Koneksi internet diperlukan untuk memuat **SweetAlert2** dari `cdn.jsdelivr.net`, yang digunakan untuk notifikasi dan dialog konfirmasi.
+
+## Penyimpanan data
+
+Data disimpan pada browser dan origin yang digunakan, dengan kunci `BOOKSELF_APPS`. Gunakan browser, profil, alamat, dan port yang sama untuk mengakses koleksi yang tersimpan. Data tidak disinkronkan ke server atau perangkat lain; menghapus data situs/browser akan menghapus koleksi. Jangan mengandalkan penyimpanan mode privat untuk koleksi permanen.
+
+## Struktur proyek
+
+```text
+bookshelf-mrz/
+├── index.html      # Struktur halaman dan formulir
+├── style.css       # Styling, layout responsif, dan modal
+├── main.js         # Pengelolaan buku, pencarian, dan localStorage
+└── assets/
+    ├── icon/       # Ikon aksi buku
+    └── img/        # Ikon aplikasi
+```
+
+## Pemeriksaan manual
+
+1. Tambahkan buku dan pastikan muncul di rak belum dibaca.
+2. Tandai selesai, lalu muat ulang halaman untuk memeriksa penyimpanan.
+3. Cari judul atau penulis, termasuk dengan huruf besar dan teks yang ditempelkan.
+4. Edit buku, kembalikan ke rak belum dibaca, lalu hapus dengan konfirmasi.
+5. Periksa tampilan desktop dan ponsel, termasuk judul buku yang panjang.
+
+Belum tersedia test suite otomatis di repository. Untuk pemeriksaan sintaks JavaScript, jalankan `node --check main.js` jika Node.js tersedia.
+
+Dibuat oleh **MrZ**.

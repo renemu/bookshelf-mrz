@@ -1,85 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Rak buku pribadi untuk menyimpan bacaan, mengatur progres, dan menemukan buku favoritmu." />
     <link rel="stylesheet" href="style.css" />
-    <link href="https://unpkg.com/css.gg@2.0.0/icons/css/search.css" rel="stylesheet" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="icon" type="image/x-icon" href="assets/img/iconBook.png" />
-    <title>Bookshelf Apps ToDo</title>
+    <link rel="icon" href="assets/img/iconBook.png" />
+    <title>Bookshelf — Rak buku pribadi</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
   </head>
   <body>
-    <header>
-      <h1>Bookshelf Apps</h1>
-      <form>
-        <input class="" type="text" id="bookTitle" name="" placeholder="Cari Buku ..." />
-      </form>
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="Bookshelf beranda"><span class="brand-icon" aria-hidden="true">▤</span> Bookshelf<span class="brand-dot">.</span></a>
+      <span class="topbar-note">Ruang kecil untuk cerita besar</span>
     </header>
-
-    <div class="wrapper">
-      <div class="container bg-white shadow">
-        <h2 class="container-header text-center">Tambah Buku</h2>
-        <form class="form" action="#" id="form">
-          <div class="form-group form-title">
-            <input type="text" id="title" name="title" required placeholder="Judul Buku" />
-          </div>
-          <div class="form-group form-title">
-            <input type="text" id="author" name="author" required placeholder="Author" />
-          </div>
-          <div class="form-group form-title">
-            <input type="date" id="date" name="date" required />
-          </div>
-          <div class="line-btn-check">
-            <button type="submit" class="btn-submit" id="btn-submit">Tambah List</button>
-          </div>
-        </form>
-        <button type="submit" class="btn-reset" id="btn-reset">Hapus Semua List</button>
-        <div class="jmlh-book">
-          <h3>Jumlah Buku :</h3>
-          <h4 id="total-books"></h4>
-        </div>
-      </div>
-      <div class="container2 shadow">
-        <h2 class="container-header">Belum Dibaca : <span id="unread-book"></span></h2>
-        <div class="list-item" id="books"></div>
-      </div>
-      <div class="container2 shadow">
-        <h2 class="container-header">Sudah Dibaca : <span id="read-book"></span></h2>
-
-        <div class="list-item" id="books-items"></div>
-      </div>
-    </div>
-    <div class="no-list shadow"></div>
-    <div id="myModal" class="modal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <span class="close">&times;</span>
-          <p>Edit Buku</p>
-        </div>
-        <div class="modal-body">
-          <form action="" id="formEdit">
-            <input type="text" class="form-group form-title" id="editJudul" />
-            <input type="text" class="form-group form-title" id="editAuthor" />
-            <input type="date" class="form-group form-title" id="editYear" />
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <div><p class="eyebrow">PERPUSTAKAAN PRIBADI</p><h1 id="page-title">Buku-bukumu.<br /><span>Cerita berikutnya.</span></h1><p class="intro-copy">Simpan bacaan favorit, tandai yang selesai, dan temukan cerita baru di rakmu.</p></div>
+        <div class="intro-art" aria-hidden="true"><span class="art-orbit"></span><div class="art-book book-one">STORIES</div><div class="art-book book-two">ONE MORE<br />CHAPTER</div><div class="art-book book-three">IDEAS</div><span class="art-caption">A little library. A lot of possibilities.</span></div>
+      </section>
+      <section class="library-heading" aria-labelledby="library-title"><div><p class="eyebrow">KOLEKSI BACAAN</p><h2 id="library-title">Rak buku kamu</h2></div><div class="search"><label class="sr-only" for="bookTitle">Cari judul, penulis, atau tanggal</label><input type="search" id="bookTitle" placeholder="Cari judul, penulis, tanggal…" autocomplete="off" /></div></section>
+      <div class="wrapper">
+        <aside class="container shadow" aria-labelledby="add-title">
+          <div class="panel-heading"><span class="panel-icon" aria-hidden="true">＋</span><h2 id="add-title">Tambah buku</h2></div>
+          <p class="panel-copy">Bacaan berikutnya dimulai di sini.</p>
+          <form class="form" id="form">
+            <div class="form-group"><label for="title">Judul buku</label><input type="text" id="title" name="title" required placeholder="Misalnya, Laut Bercerita" /></div>
+            <div class="form-group"><label for="author">Penulis</label><input type="text" id="author" name="author" required placeholder="Nama penulis" /></div>
+            <div class="form-group"><label for="date">Tanggal bacaan</label><input type="date" id="date" name="date" required /></div>
+            <button type="submit" class="btn-submit" id="btn-submit">＋ Tambahkan ke rak</button>
           </form>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" id="simpan">Simpan</button>
-        </div>
+          <div class="jmlh-book"><div><span class="eyebrow">TOTAL KOLEKSI</span><p>Setiap buku, sebuah perjalanan.</p></div><strong id="total-books">0</strong></div>
+          <button type="button" class="btn-reset" id="btn-reset">Hapus semua buku</button>
+          <p class="storage-note">Tersimpan otomatis di browser ini.</p>
+        </aside>
+        <section class="container2 unread-shelf" aria-labelledby="unread-title"><div class="shelf-heading"><div><span class="status-dot" aria-hidden="true"></span><h2 id="unread-title">Belum dibaca</h2></div><span class="count" id="unread-book">0</span></div><p class="panel-copy">Petualangan yang menunggu giliran.</p><div id="books" class="book-list"></div><div class="empty-shelf"><span aria-hidden="true">▤</span><h3>Masih ada ruang untuk cerita</h3><p>Tambahkan buku pertamamu lewat formulir di samping.</p></div></section>
+        <section class="container2 read-shelf" aria-labelledby="read-title"><div class="shelf-heading"><div><span class="status-dot" aria-hidden="true"></span><h2 id="read-title">Sudah dibaca</h2></div><span class="count" id="read-book">0</span></div><p class="panel-copy">Cerita selesai, inspirasi tetap tinggal.</p><div id="books-items" class="book-list"></div><div class="empty-shelf"><span aria-hidden="true">✓</span><h3>Satu bab lagi menuju selesai</h3><p>Tandai buku yang sudah kamu baca. Buku itu akan muncul di sini.</p></div></section>
       </div>
+      <div class="no-list" aria-hidden="true"></div>
+    </main>
+    <div id="myModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="edit-title">
+      <div class="modal-content"><div class="modal-header"><h2 id="edit-title">Edit buku</h2><button type="button" class="close" aria-label="Tutup dialog">&times;</button></div><p class="panel-copy">Perbarui detail bacaanmu.</p><div class="modal-body"><form id="formEdit"><label for="editJudul">Judul buku</label><input type="text" id="editJudul" /><label for="editAuthor">Penulis</label><input type="text" id="editAuthor" /><label for="editYear">Tanggal bacaan</label><input type="date" id="editYear" /></form></div><div class="modal-footer"><button type="button" id="simpan">Simpan perubahan</button></div></div>
     </div>
-
-    <footer class="footer-container" style="background-color: #00b3ff; color: white; text-align: center; padding: 10px; width: 100%">&#xA9; Created by MrZ 2024 version 1.0</footer>
+    <footer class="footer-container"><span>Bookshelf<span class="brand-dot">.</span> <span class="footer-credit">Dibuat oleh MrZ</span></span><span>Selalu ada cerita untuk dibaca.</span></footer>
     <script src="main.js"></script>
   </body>
 </html>

@@ -86,8 +86,8 @@ function makeBook(newBook) {
   container.setAttribute("id", `book-${newBook.id}`);
 
   if (newBook.isReaded) {
-    const undoButton = document.createElement("img");
-    undoButton.setAttribute("src", "assets/icon/undo-outline.svg");
+    const undoButton = document.createElement("button");
+    undoButton.setAttribute("type", "button");
     undoButton.classList.add("undo-button");
 
     undoButton.addEventListener("click", function () {
@@ -291,6 +291,12 @@ function makeBook(newBook) {
     container.append(checkButton, editButton, trashButton);
   }
 
+  for (const action of container.querySelectorAll("button")) {
+    const labels = { "check-button": "Tandai sudah dibaca", "undo-button": "Pindahkan ke belum dibaca", "edit-button": "Edit buku", "trash-button": "Hapus buku" };
+    action.type = "button";
+    action.title = labels[action.className];
+    action.setAttribute("aria-label", `${labels[action.className]}: ${newBook.bookTitle}`);
+  }
   return container;
 }
 
@@ -305,9 +311,9 @@ document.addEventListener(EVENT_CHANGE, function () {
   readBookList.innerHTML = "";
 
   const unReadBook = document.getElementById("unread-book");
-  unReadBook.innerText = "";
+  unReadBook.innerText = "0";
   const readBook = document.getElementById("read-book");
-  readBook.innerText = "";
+  readBook.innerText = "0";
 
   for (const bookItem of books) {
     const bookList = makeBook(bookItem);
@@ -323,6 +329,7 @@ document.addEventListener(EVENT_CHANGE, function () {
   }
   ifNoList();
   totalOfBooks();
+  filterBooks();
 });
 
 function ifNoList() {
@@ -378,18 +385,14 @@ function addBookTitleToReadList(bookId) {
   saveData();
 }
 
-document.getElementById("bookTitle").addEventListener("keyup", function () {
-  const inputValue = document.getElementById("bookTitle").value;
-  const listBooks = document.querySelectorAll(".list-item");
-
-  for (let i = 0; i < listBooks.length; i++) {
-    if (!inputValue || listBooks[i].textContent.toLowerCase().indexOf(inputValue) > -1) {
-      listBooks[i].classList.remove("hide");
-    } else {
-      listBooks[i].classList.add("hide");
-    }
+function filterBooks() {
+  const inputValue = document.getElementById("bookTitle").value.trim().toLowerCase();
+  for (const book of document.querySelectorAll(".book-list .item")) {
+    book.classList.toggle("hide", !book.textContent.toLowerCase().includes(inputValue));
   }
-});
+}
+
+document.getElementById("bookTitle").addEventListener("input", filterBooks);
 
 function findBook(bookId) {
   for (const todoItem of books) {
